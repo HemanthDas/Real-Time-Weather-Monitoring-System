@@ -52,9 +52,6 @@ const checkForAlerts = async (city) => {
   if (summary && summary.max_temp > alertThresholds.temperature) {
     consecutiveBreaches[city] = (consecutiveBreaches[city] || 0) + 1;
     if (consecutiveBreaches[city] >= 2) {
-      console.log(
-        `ALERT: High temperature in ${city} for two consecutive updates!`
-      );
       return true;
     }
   } else {
@@ -91,9 +88,6 @@ const fetchWeatherForCity = async (city) => {
       visibility,
       weather[0].main
     );
-    console.log(
-      `Weather updated for ${city}: ${main.temp}°C ${weather[0].main} ${main.humidity}% ${wind.speed}m/s ${visibility}m`
-    );
   } catch (error) {
     console.error(`Failed to fetch weather for ${city}: ${error.message}`);
   }
@@ -122,7 +116,6 @@ const getHistoricalDataHandler = async (req, res) => {
 
 const startWeatherPolling = () => {
   const intervalMs = process.env.WEATHER_INTERVAL_MS || 300000;
-  console.log(`Starting weather polling every ${intervalMs}ms...`);
 
   setInterval(() => {
     cities.forEach((city) => fetchWeatherForCity(city));

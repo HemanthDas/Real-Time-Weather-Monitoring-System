@@ -102,9 +102,6 @@ const updateDailySummary = async (
   weather
 ) => {
   const today = getStartOfDay();
-  console.log(
-    `Updating weather for ${city} on ${today} ... ${temp}°C ... ${weather} ${humidity}% ... ${windSpeed} m/s ... ${visibility} m`
-  );
   try {
     // Find the existing summary or create a new one with initial values
     let summary = await WeatherSummary.findOne({ city, summary_date: today });
@@ -173,7 +170,6 @@ const updateDailySummary = async (
     }
 
     await summary.save();
-    console.log(`Weather updated for ${city}: ${temp}°C`);
   } catch (error) {
     console.error(`Error updating summary for ${city}: ${error.message}`);
   }
