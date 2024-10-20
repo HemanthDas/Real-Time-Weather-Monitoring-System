@@ -6,6 +6,7 @@ import {
   CurrentWeather,
   WeatherSummary,
   HistoricalData,
+  getAlertStatus,
 } from "../api/weatherApi";
 
 type DashboardProps = {
@@ -22,6 +23,7 @@ const Dashboard: React.FC<DashboardProps> = ({ city }) => {
   const [historicalData, setHistoricalData] = useState<HistoricalData[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
+  const [alertTriggered, setAlertTriggered] = useState<boolean>(false);
 
   useEffect(() => {
     const fetchWeatherData = async () => {
@@ -30,10 +32,12 @@ const Dashboard: React.FC<DashboardProps> = ({ city }) => {
         const current = await getCurrentWeather(city);
         const summary = await getWeatherSummary(city);
         const historical = await getHistoricalData(city, "2024-10-19");
+        const alertTriggered = await getAlertStatus(city);
 
         setCurrentWeather(current);
         setWeatherSummary(summary);
         setHistoricalData(historical);
+        setAlertTriggered(alertTriggered.alertTriggered);
       } catch (err) {
         setError("Failed to fetch weather data. Please try again.");
         console.error(err);
@@ -134,6 +138,11 @@ const Dashboard: React.FC<DashboardProps> = ({ city }) => {
             <p>No historical data available.</p>
           )}
         </div>
+        {alertTriggered && (
+          <div className="text-red-700">
+            Alert Triggered, Now the temperature is 35 degrees
+          </div>
+        )}
       </div>
     </div>
   );
