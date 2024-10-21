@@ -78,7 +78,7 @@ const Dashboard: React.FC<DashboardProps> = ({ city }) => {
           <h2 className="text-2xl font-bold mb-4 text-center">
             Weather Summary
           </h2>
-          {weatherSummary && (
+          {weatherSummary ? (
             <div className="bg-slate-600 p-4 rounded shadow">
               <p>
                 Average Temperature:{" "}
@@ -108,6 +108,8 @@ const Dashboard: React.FC<DashboardProps> = ({ city }) => {
                 Alert Triggered: {weatherSummary.alertTriggered ? "Yes" : "No"}
               </p>
             </div>
+          ) : (
+            <p>No Weather Summary data available.</p>
           )}
         </div>
 
