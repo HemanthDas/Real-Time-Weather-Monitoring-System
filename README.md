@@ -1,4 +1,4 @@
-# **Weather Alert Dashboard**
+## **Weather Alert Dashboard**
 
 This project is a **weather monitoring dashboard** with backend services for fetching weather data, generating alerts, and displaying them in a clean frontend interface. It uses **TypeScript, Tailwind CSS, MongoDB**, and features APIs for rule evaluation and alerts.
 
@@ -13,11 +13,6 @@ This project is a **weather monitoring dashboard** with backend services for fet
 5. [Frontend Setup](#frontend-setup)
 6. [API Documentation](#api-documentation)
 7. [Alert System Logic](#alert-system-logic)
-8. [Error Handling](#error-handling)
-9. [Testing and Validation](#testing-and-validation)
-10. [Deployment Instructions](#deployment-instructions)
-11. [Troubleshooting](#troubleshooting)
-12. [License](#license)
 
 ---
 
@@ -171,95 +166,3 @@ export const evaluateAlert = (
   return { alert: false, message: "Temperature is normal." };
 };
 ```
-
----
-
-## **8. Error Handling**
-
-- **Backend**:  
-   All API responses include structured error handling. Example:
-
-  ```json
-  {
-    "error": "Failed to fetch weather data",
-    "statusCode": 500
-  }
-  ```
-
-- **Frontend**:  
-   Alerts are shown using modals or toast notifications when API requests fail.
-
----
-
-## **9. Testing and Validation**
-
-### **Backend Testing**
-
-1. Use **Postman** to test the APIs.
-2. Verify if weather alerts trigger correctly for given temperature inputs.
-
-### **Frontend Validation**
-
-- Check if weather data displays properly.
-- Simulate errors and ensure proper alerts show on the UI.
-
----
-
-## **10. Deployment Instructions**
-
-### **Backend Deployment**
-
-1. Use **Docker** to containerize the backend:
-
-   ```bash
-   docker build -t weather-backend .
-   docker run -d -p 5000:5000 weather-backend
-   ```
-
-2. Alternatively, deploy on **Heroku / DigitalOcean**.
-
-### **Frontend Deployment**
-
-1. Build the frontend:
-
-   ```bash
-   npm run build
-   ```
-
-2. Deploy on **Vercel / Netlify**:
-   ```bash
-   vercel deploy
-   ```
-
----
-
-## **11. Troubleshooting**
-
-### **Backend Issues**
-
-- **MongoDB Connection Error**:  
-   Verify the URI in `.env` and ensure MongoDB is running:
-
-  ```bash
-  sudo systemctl status mongod
-  ```
-
-- **Port Already in Use**:  
-   Use a different port or kill the process using:
-  ```bash
-  sudo lsof -i :5000
-  sudo kill <process-id>
-  ```
-
-### **Frontend Issues**
-
-- **CORS Error**:  
-   Make sure the backend allows requests from the frontend origin.
-
----
-
-## **12. License**
-
-This project is licensed under the **MIT License**.
-
----
